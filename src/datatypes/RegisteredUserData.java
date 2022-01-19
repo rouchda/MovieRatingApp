@@ -3,7 +3,7 @@ package datatypes;
 /**
  * Contains the necessary informations about a user.
  * 
- * 
+ * @author Maher Mansour (3091490), Rouchda Pepouna Makwet (3091241), Walid Al Sibai(3087459), Mohamad Kalach (3074207), Tumamo Dzukou Joel Arnaud(3105963)
  *
  */
 public class RegisteredUserData {
