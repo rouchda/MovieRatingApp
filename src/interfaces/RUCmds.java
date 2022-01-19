@@ -21,4 +21,8 @@ public interface RUCmds {
 	public Rating makeRating(int id, Timestamp creationDate, RegisteredUserData username, int movieRating, String comment,
 	int mId, Date publishingDate);
 
+	//createUserProfile(age..)
+	//setNewMovie(title..)
+	//accessingmovielistdb()
+
 }

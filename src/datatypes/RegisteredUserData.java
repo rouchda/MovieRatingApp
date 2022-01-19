@@ -7,17 +7,24 @@ package datatypes;
  *
  */
 public class RegisteredUserData {
+
+	private int Uid;
 	private String username;
 	private int age;
 	private String email;
 
-	public RegisteredUserData(String name, int age, String email) {
+	public RegisteredUserData(int Uid, String name, int age, String email) {
+		this.Uid = Uid;
 		this.username = username;
 		this.age = age;
 		this.email = email;
 	}
 
-	public String getName() {
+	public int getUid() {
+		return Uid;
+	}
+
+	public String getusername() {
 		return username;
 	}
 

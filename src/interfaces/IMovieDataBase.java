@@ -18,6 +18,10 @@ public interface IMovieDataBase {
 	public ArrayList<MovieDatabase> getAvailableHolidayOffers(
 			Timestamp arrivalTime, Timestamp departureTime, int persons);
 
+	//public User registration createuserprofile(age,username,email, 
+	//get_fbaccessedmovielistdb(title, moviedirector, actor publishingdate)	
+	//get_fbGetmovielistdb()
+
 	public Rating get_fbMRA_RM(Timestamp arrivalTime,
 			Timestamp departureTime, int hid, RegisteredUserData guestData, int persons);
 

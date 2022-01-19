@@ -15,12 +15,12 @@ import datatypes.RegisteredUserData;
  */
 public class MovieDatabase {
 
-	int id;
-	RegisteredUserData username;
-	int movieRating;
-	Date publishingDate;
 	int mId;
-
+	MovieData Title;
+	MovieData 
+	MovieData movieRating;
+	Date publishingDate;
+	
 	public MovieDatabase(int id, RegisteredUserData username, int movieRating, String comment,
 	int mId, Date publishingDate) {
 		this.id = id;

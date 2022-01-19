@@ -14,6 +14,8 @@ public class MovieData {
 	public String Title;
 	public String MovieDirector;
 	public String Actor;
+	public int movieRating;
+	public String comment;
 
 	public MovieData(int mId, String Title, String Actor, String MovieDirector) {
 		this.mId = mId;

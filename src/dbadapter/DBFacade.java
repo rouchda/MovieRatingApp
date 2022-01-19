@@ -9,9 +9,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 
-import datatypes.AddressData;
 import datatypes.RegisteredUserData;
-import interfaces.IMovieDatabase;
 
 /**
  * Class which acts as the connector between application and database. Creates
