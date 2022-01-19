@@ -16,10 +16,10 @@ public class RegisterServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		String uname, pass;
+		String username, pass;
 
 		response.setContentType("text/html");
-		uname = request.getParameter("username");
+		username = request.getParameter("username");
 		pass = request.getParameter("password");
 		PrintWriter out = response.getWriter();
 
@@ -29,7 +29,7 @@ public class RegisterServlet extends HttpServlet {
 			Connection con = DriverManager.getConnection("jdbc:mysql://localhost/registeredusers", "root", "maher");
 			String query = "SELECT * from userdata where username= ? AND password= ?";
 			PreparedStatement ps = con.prepareStatement(query);
-			ps.setString(1, uname);
+			ps.setString(1, username);
 			ps.setString(2, pass);
 			ResultSet rs = ps.executeQuery();
 			if (rs.next()) {
@@ -37,7 +37,7 @@ public class RegisterServlet extends HttpServlet {
 			} else {
 				String query2 = "INSERT INTO userdata(username,password) VALUES(?,?)";
 				PreparedStatement ps2 = con.prepareStatement(query2);
-				ps2.setString(1, uname);
+				ps2.setString(1, username);
 				ps2.setString(2, pass);
 				int i = ps2.executeUpdate();
 				out.println("User Registered" + i);

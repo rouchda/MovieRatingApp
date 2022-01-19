@@ -16,7 +16,6 @@ import datatypes.RegisteredUserData;
  * Java objects from SQL returns. Exceptions thrown in this class will be
  * catched with a 500 error page.
  * 
- * @author swe.uni-due.de
  *
  */
 public class DBFacade implements IMovieDatabase {
@@ -304,4 +303,8 @@ public class DBFacade implements IMovieDatabase {
 
 		return dayDifference * fee;
 	}
+
+    public boolean checkRatingById(int mId) {
+        return false;
+    }
 }

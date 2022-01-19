@@ -8,20 +8,17 @@ package datatypes;
  */
 public class RegisteredUserData {
 
-	private int Uid;
+	//private int Uid;
 	private String username;
 	private int age;
 	private String email;
+	private String password;
 
-	public RegisteredUserData(int Uid, String name, int age, String email) {
-		this.Uid = Uid;
-		this.username = username;
+	public RegisteredUserData(int Uid, String name, int age, String email, String password) {
+		this.username = name;
 		this.age = age;
 		this.email = email;
-	}
-
-	public int getUid() {
-		return Uid;
+		this.password = password;
 	}
 
 	public String getusername() {
@@ -35,7 +32,29 @@ public class RegisteredUserData {
 	public String getEmail() {
 		return email;
 	}
+
+	public String setusername(String name) {
+		return this.username = name;
+	}
+
+	public int setAge(int age) {
+		return this.age = age;
+	}
+
+	public String setemail(String email) {
+		return this.email = email;
+	}
+
+	public String getPassword()
+     {
+        return password;
+     }
+	public String setPassword(String password)
+     {
+        return this.password = password;
 }
+}
+
 
 	
 		

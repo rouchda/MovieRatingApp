@@ -13,13 +13,13 @@ import datatypes.RegisteredUserData;
  */
 public class Rating {
 
-	int id;
-	Timestamp creationDate;
-	RegisteredUserData username;
-	int movieRating;
-	String comment;
-	Date publishingDate;
-	int mId;
+	public int id;
+	public Timestamp creationDate;
+	public RegisteredUserData username;
+	public int movieRating;
+	public String comment;
+	public Date publishingDate;
+	public int mId;
 
 	public Rating(int id, Timestamp creationDate, RegisteredUserData username, int movieRating, String comment,
 			int mId, Date publishingDate) {
@@ -88,36 +88,6 @@ public class Rating {
 	public void setpublishingDate(Date publishingDate) {
 		this.publishingDate = publishingDate;
 	}
-
-	/**
-	 * Checks if this user has already rated the movie.
-	 * 
-	 * @param username
-	 * @param mId
-	 * @return
-	 */
-	/*public boolean verify(RegisteredUserData username, int mId) {
-		//Check precondition
-		assert this.username.before(this.mId) :
-			"pre not satisfiedd: this.username < this.movieRating";
-		assert username.before(movieRating) :
-			"pre not satisfiedd: username < movieRating";
-		// Case 1
-		if ((username.after(this.username) || username.equals(this.username))
-				&& (username.before(this.movieRating) || username.equals(this.movieRating))) {
-			return true;
-		}
-		// Case 2
-		if ((movieRating.after(this.username) || movieRating.equals(this.username))
-				&& (movieRating.before(this.movieRating) || movieRating.equals(this.movieRating))) {
-			return true;
-		}
-		// Case 3
-		if (username.before(this.username) && movieRating.after(this.movieRating)) {
-			return true;
-		}
-		return false;
-	}  */
 
 	/*
 	*checks if movieRating >= 1 and movieRating <= 10

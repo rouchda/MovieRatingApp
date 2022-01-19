@@ -13,7 +13,7 @@ import datatypes.RegisteredUserData;
 import dbadapter.MovieDatabase;
 
 /**
- * Class responsible for the GUI of the guest
+ * Class responsible for the GUI of the user
  * 
  * @author swe.uni-due.de
  *
@@ -33,11 +33,11 @@ public class UserGUI extends HttpServlet {
 		// Catch error if there is no page contained in the request
 		String action = (request.getParameter("action") == null) ? "" : request.getParameter("action");
 
-		// Case: Request booking form
-		if (action.equals("selectHolidayOffer")) {
+		// Case: Request rating form
+		if (action.equals("selectRating")) {
 			// Set request attributes
-			request.setAttribute("pagetitle", "Book Offer");
-			request.setAttribute("hid", request.getParameter("hid"));
+			request.setAttribute("pagetitle", "Rate Movie");
+			request.setAttribute("mId", request.getParameter("mId"));
 
 			// Dispatch request to template engine
 			try {
@@ -49,7 +49,7 @@ public class UserGUI extends HttpServlet {
 		} else {
 
 			// Set request attributes
-			request.setAttribute("pagetitle", "Search Offers");
+			request.setAttribute("pagetitle", "Search Movies");
 
 			// Dispatch request to template engine
 			try {
@@ -69,18 +69,19 @@ public class UserGUI extends HttpServlet {
 		request.setAttribute("navtype", "guest");
 
 		// Generate and show results of a search
-		if (request.getParameter("action").equals("browseAvailableHolidayOffers")) {
+		if (request.getParameter("action").equals("accessingMovieListDB")) {
 			request.setAttribute("pagetitle", "Search results");
 			List<MovieDatabase> availableOffers = null;
 
 			// Call application to request the results
 			try {
-				availableOffers = MRA_Application.getInstance().getAvailableHolidayOffers(
+				Movielist = MRA_Application.getInstance().get_fbGetMovieListDB(
 						request.getParameter("arrivalTime"), request.getParameter("departureTime"),
 						request.getParameter("persons"));
 
-				// Dispatch results to template engine
-				request.setAttribute("availableOffers", availableOffers);
+				
+				// Dispatch results to template engines
+				request.setAttribute("Movielist", Movielist);
 				request.getRequestDispatcher("/templates/offersRepresentation.ftl").forward(request, response);
 			} catch (Exception e1) {
 				try {
@@ -92,18 +93,17 @@ public class UserGUI extends HttpServlet {
 				}
 				e1.printStackTrace();
 			}
-			// Insert booking into database
-		} else if (request.getParameter("action").equals("bookHolidayOffer")) {
-			// Decide whether booking was successful or not
-			if (MRA_Application.getInstance().makeBooking(request.getParameter("arrivalTime"),
-					request.getParameter("departureTime"), request.getParameter("hid"),
-					new RegisteredUserData(request.getParameter("name"), request.getParameter("email")),
-					request.getParameter("persons")) != null) {
+			// Insert Rating into database
+		} else if (request.getParameter("action").equals("get_fbMRA_RM")) {
+			// Decide whether rating was successful or not
+			if (MRA_Application.getInstance().makeRating(request.getParameter("mId"),
+					request.getParameter("movieRating"), request.getParameter("comment"),
+					request.getParameter("creationDate"), request.getParameter("publishingDate"),
+					new RegisteredUserData(request.getParameter("Uid"),request.getParameter("name"), request.getParameter("email"))) != null) {
 
 				// Set request attributes
-				request.setAttribute("pagetitle", "Booking Successful");
-				request.setAttribute("message",
-						"Booking successfully created. You will receive a confirmation mail shortly");
+				request.setAttribute("pagetitle", "Rating Successful");
+				request.setAttribute("message", "Rating successfully created.");
 
 				// Dispatch to template engine
 				try {
@@ -114,9 +114,9 @@ public class UserGUI extends HttpServlet {
 
 				// Catch booking error and print an error on the gui
 			} else {
-				request.setAttribute("pagetitle", "Booking failed");
+				request.setAttribute("pagetitle", "Rating failed");
 				request.setAttribute("message",
-						"Booking failed. The selected offer is no longer available for your selected parameters.");
+						"Rating failed. The selected offer is no longer available for your selected parameters.");
 
 				try {
 					request.getRequestDispatcher("/templates/failInfoRepresentation.ftl").forward(request,

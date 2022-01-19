@@ -12,16 +12,15 @@ import dbadapter.Rating;
 import dbadapter.DBFacade;
 import dbadapter.MovieDatabase;
 import interfaces.RUCmds;
-import interfaces.SMCmds;
+import interfaces.UUCmds;
 
 /**
  * This class contains the MRA_Application which acts as the interface between all
  * components.
  * 
- * @author swe.uni-due.de
  *
  */
-public class MRA_Application implements RUCmds, SMCmds {
+public class MRA_Application implements RUCmds, UUCmds {
 
 	private static MRA_Application instance;
 
@@ -41,73 +40,71 @@ public class MRA_Application implements RUCmds, SMCmds {
 	/**
 	 * Calls DBFacace method to retrieve all offers fitting to the given
 	 * parameters.
-	 * 
-	 * @param arrivalTime
-	 * @param departureTime
-	 * @param persons
-	 * @return
+	 * Calls DBFacace method to retrieve all movies fitting to the given
+	 * parameters.
+	 * param arrivalTime
+	 * param departureTime
+	 * param persons
+	 * return
 	 */
-	public ArrayList<MovieDatabase> getAvailableHolidayOffers(String arrivalTime, String departureTime, String persons) {
-		ArrayList<MovieDatabase> result = null;
+	public ArrayList<MovieDatabase> accessingMovieListDB(String Title, MovieData mId, MovieData movieDirector, MovieData Actor, MovieData movieRating, MovieData comment) {
+		ArrayList<MovieDatabase> Movielist = null;
 
 		// Parse string attributes to correct datatype
 		try {
-			DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
-			Date date = dateFormat.parse(arrivalTime);
-			long time = date.getTime();
-			Timestamp arrivalTimeSQL = new Timestamp(time);
-			Date date2 = dateFormat.parse(departureTime);
-			time = date2.getTime();
-			Timestamp departureTimeSQL = new Timestamp(time);
-			int personsSQL = Integer.parseInt(persons);
-			result = DBFacade.getInstance().getAvailableHolidayOffers(arrivalTimeSQL, departureTimeSQL, personsSQL);
+			Movielist = ((Object) DBFacade.getInstance()).accessingMovieListDB();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
-		return result;
+		return Movielist;
 	}
 
 	/**
 	 * Forwards a new offer to the database.
+	 * Add new movies to database.
 	 * 
-	 * @param startTime
-	 * @param endTime
-	 * @param address
-	 * @param capacity
-	 * @param fee
+	 * @param mId
+	 * @param Title
+	 * @param movieDirector
+	 * @param Actor
+	 * @param publishingDate
+	 * 
 	 */
-	public void insertOffer(String startTime, String endTime, MovieData addressData, String capacity, String fee) {
+	public void setNewMovie(String Title, int mId, String movieDirector, String Actor, Date publishingDate) {
 
 		// Parse inputs to correct datatypes
 		try {
 			DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
-			Date date = dateFormat.parse(startTime);
-			long time = date.getTime();
-			Timestamp startTimeSQL = new Timestamp(time);
-			date = dateFormat.parse(endTime);
-			time = date.getTime();
-			Timestamp endTimeSQL = new Timestamp(time);
-			int capacitySQL = Integer.parseInt(capacity);
-			double feeSQL = Double.parseDouble(fee);
-			DBFacade.getInstance().insertOffer(startTimeSQL, endTimeSQL, addressData, capacitySQL, feeSQL);
+			Date date = dateFormat(publishingDate);
+			String title = new String(Title);
+			String Director = new String(movieDirector); 
+			String actor = new String(Actor);
+			int Id = new int(mId);
+
+			DBFacade.getInstance().setNewMovie();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
+	private Date dateFormat(Date publishingDate) {
+		return null;
+	}
+
 	/**
-	 * Forwards a booking request to the database and waits for the new booking
-	 * offer. This will be returned to the GUI after.
+	 * Forwards a rating request to the database. This will be returned to the UserGUI after.
 	 * 
-	 * @param arrivalTime
-	 * @param departureTime
-	 * @param hid
-	 * @param RegisteredUserData
+	 * @param mId
+	 * @param movieRating
+	 * @param comment
+	 * @param username
+	 * @param creationDate
+	 * @param integer 
 	 * @param persons
 	 * @return
 	 */
-	public Rating makeRating(int mId, int movieRating, String comment, RegisteredUserData username) 
+	public Rating makeRating(int mId, int movieRating, String comment, RegisteredUserData username, Timestamp creationDate, Date publishingDate, Object integer) 
 	{
 
 		// pre: md->one(m: MovieDatabase | m.movieID=mId
@@ -120,18 +117,12 @@ public class MRA_Application implements RUCmds, SMCmds {
 
 		// Parse inputs to correct datatypes
 		try {
+			int Id = new int(mId); 
 			String comment = new String(comment);
-			Date date = dateFormat.parse(arrivalTime);
-			long time = date.getTime();
-			Timestamp arrivalTimeSQL = new Timestamp(time);
-			DateFormat dateFormat2 = new SimpleDateFormat("MM/dd/yyyy");
-			Date date2 = dateFormat2.parse(departureTime);
-			long time2 = date2.getTime();
-			Timestamp departureTimeSQL = new Timestamp(time2);
-			int mIdSQL = Integer.parseInt(mId);
+			long creationDate = creationDate.getTime();
+			Timestamp creationDateSQL = new Timestamp(creationDate);
 			int movieRatingSQL = Integer.parseInt(movieRating);
-			okfail = DBFacade.getInstance().get_fbMRA_RM(arrivalTimeSQL, departureTimeSQL, hidSQL, RegisteredUsers,
-					personsSQL);
+			okfail = DBFacade.getInstance().get_fbMRA_RM();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -140,25 +131,49 @@ public class MRA_Application implements RUCmds, SMCmds {
 
 	/**
 	 * Initiates deleting of all bookings not paid and older than 14 days.
-	 */
+	 
 	public void checkPayment() {
 		DBFacade.getInstance().setAvailableHolidayOffer();
 	}
+	*/
 
 	/**
-	 * Checks precondition holidayoffer exists
+	 * Checks precondition alreadyRated exists
 	 * 
 	 * @param mId
 	 * @return
 	 */
 	private boolean alreadyRated(int mId) {
-		return DBFacade.getInstance().checkHolidayOfferById(mId);
+		return DBFacade.getInstance().checkRatingById(mId);
 	}
 
 	@Override
-	public Rating makeBooking(String arrivalTime, String departureTime, String hid, RegisteredUserData guestData,
-			String persons) {
+	public Rating makeRating(int id, Timestamp creationDate, RegisteredUserData username, int movieRating,
+			String comment, int mId, Date publishingDate) {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public void createUserProfile(RegisteredUserData username, RegisteredUserData age, RegisteredUserData email) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setNewMovie(MovieData Title, MovieData mId, MovieData movieDirector, MovieData Actor) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public ArrayList<MovieDatabase> accessingMovieListDB(MovieData Title, MovieData mId, MovieData movieDirector,
+			MovieData Actor, MovieData movieRating, MovieData comment) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+    public Object get_fbGetMovieListDB(String parameter, String parameter2, String parameter3) {
+        return null;
+    }
 }

@@ -1,4 +1,4 @@
-package servlets;
+/*package servlets;
 
 import java.io.IOException;
 
@@ -15,14 +15,14 @@ import datatypes.MovieData;
  * 
  * @author swe.uni-due.de
  *
- */
+ 
 public class StaffmemberGUI extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * doGet contains the insertOffer form
-	 */
+	 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) {
 
 		// set pagetitle und navtype
@@ -37,10 +37,11 @@ public class StaffmemberGUI extends HttpServlet {
 		}
 
 	}
+	*/
 
 	/**
 	 * Contains handling of insertOffer call
-	 */
+	 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) {
 
 		request.setAttribute("navtype", "staffmember");
@@ -73,4 +74,4 @@ public class StaffmemberGUI extends HttpServlet {
 			doGet(request, response);
 
 	}
-}
+}*/

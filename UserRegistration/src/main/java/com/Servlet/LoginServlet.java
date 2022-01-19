@@ -17,9 +17,9 @@ public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		String uname, pass, action;
+		String username, pass, action;
 		response.setContentType("text/html");
-		uname = request.getParameter("username");
+		username = request.getParameter("username");
 		pass = request.getParameter("password");
 		action =  request.getParameter("value");
 		PrintWriter out = response.getWriter();
@@ -34,7 +34,7 @@ public class LoginServlet extends HttpServlet {
 			Connection con = DriverManager.getConnection("jdbc:mysql://localhost/registeredusers", "root", "maher");
 			String query = "SELECT * from userdata where username= ? AND password= ?";
 			PreparedStatement ps = con.prepareStatement(query);
-			ps.setString(1, uname);
+			ps.setString(1, username);
 			ps.setString(2, pass);
 		ResultSet rs = ps.executeQuery();
 		if(rs.next())

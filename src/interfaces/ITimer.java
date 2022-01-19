@@ -5,9 +5,10 @@ package interfaces;
  * 
  * @author swe.uni-due.de
  *
- */
+ 
 public interface ITimer {
 
 	public void checkPayment();
 
 }
+*/

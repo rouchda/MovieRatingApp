@@ -4,7 +4,6 @@ import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 
-import datatypes.MovieData;
 import datatypes.RegisteredUserData;
 
 /**
@@ -15,74 +14,63 @@ import datatypes.RegisteredUserData;
  */
 public class MovieDatabase {
 
-	int mId;
-	MovieData Title;
-	MovieData 
-	MovieData movieRating;
-	Date publishingDate;
 	
-	public MovieDatabase(int id, RegisteredUserData username, int movieRating, String comment,
-	int mId, Date publishingDate) {
-		this.id = id;
-		this.startTime = startTime;
-		this.endTime = endTime;
-		this.addressData = addressData;
-		this.capacity = capacity;
-		this.fee = fee;
-		this.bookings = new ArrayList<Rating>();
+    public int mId;
+	public String Title;
+	public String MovieDirector;
+	public String Actor;
+	public int movieRating;
+	public String comment;
+	public Date publishingDate;
+	private ArrayList<Rating> ratings;
+
+	public MovieDatabase(int mId, String Title, String Actor, String MovieDirector, RegisteredUserData username, int movieRating, String comment,
+	 Date publishingDate) {
+		this.mId = mId;
+		this.Title = Title;
+		this.Actor = Actor;
+		this.MovieDirector = MovieDirector;
+		this.publishingDate = publishingDate;
+		this.movieRating = movieRating;
+		this.comment = comment;
+		this.ratings = new ArrayList<Rating>();
 	}
 
 	public String toString() {
-		return "HolidayOffer " + id + " startTime: " + startTime + " endTime: " + endTime + " capacity: " + capacity
-				+ " fee: " + fee;
+		return "mId" + mId + "Title " + Title + " Actor " + Actor +"Publishing Date:" + publishingDate "Rating" + movieRating + " comment: " + comment;
 	}
 
-	public int getId() {
-		return id;
+	public int getmId() {
+		return mId;
 	}
 
-	public Timestamp getStartTime() {
-		return startTime;
+	public String getTitle() {
+		return Title;
 	}
 
-	public Timestamp getEndTime() {
-		return endTime;
+	public String getActor() {
+		return Actor;
 	}
 
-	public MovieData getAddressData() {
-		return addressData;
+	public Date getpublishingDate() {
+		return publishingDate;
 	}
 
-	public int getCapacity() {
-		return capacity;
+	public int getmovieRating() {
+		return movieRating;
 	}
 
-	public double getFee() {
-		return fee;
+	public String getcomment() {
+		return comment;
 	}
 
-	public ArrayList<Rating> getBookings() {
-		return bookings;
+
+	public ArrayList<Rating> getRatings() {
+		return ratings;
 	}
 
-	public void setBookings(ArrayList<Rating> bookings) {
-		this.bookings = bookings;
+	public void setBookings(ArrayList<Rating> ratings) {
+		this.ratings = ratings;
 	}
 
-	/**
-	 * Checking if this offer is available. All bookings for this offer are
-	 * iteratively checked. check if a movie is already present in the MDB
-	 * 
-	 * @param arrivalTime
-	 * @param departureTime
-	 * @return
-	 */
-	public boolean available(Timestamp arrivalTime, Timestamp departureTime) {
-		for (int i = 0; i < bookings.size(); i++) {
-			if (bookings.get(i).overlap(arrivalTime, departureTime)) {
-				return false;
-			}
-		}
-		return true;
-	}
 }
