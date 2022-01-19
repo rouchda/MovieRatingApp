@@ -11,7 +11,7 @@ import datatypes.RegisteredUserData;
 import dbadapter.Rating;
 import dbadapter.DBFacade;
 import dbadapter.MovieDatabase;
-import interfaces.GCmds;
+import interfaces.RUCmds;
 import interfaces.SMCmds;
 
 /**
@@ -21,7 +21,7 @@ import interfaces.SMCmds;
  * @author swe.uni-due.de
  *
  */
-public class MRA_Application implements GCmds, SMCmds {
+public class MRA_Application implements RUCmds, SMCmds {
 
 	private static MRA_Application instance;
 
@@ -107,7 +107,7 @@ public class MRA_Application implements GCmds, SMCmds {
 	 * @param persons
 	 * @return
 	 */
-	public Rating makeRating(String mId, String movieRating, String comment, RegisteredUserData username) 
+	public Rating makeRating(int mId, int movieRating, String comment, RegisteredUserData username) 
 	{
 
 		// pre: md->one(m: MovieDatabase | m.movieID=mId
@@ -153,5 +153,12 @@ public class MRA_Application implements GCmds, SMCmds {
 	 */
 	private boolean alreadyRated(int mId) {
 		return DBFacade.getInstance().checkHolidayOfferById(mId);
+	}
+
+	@Override
+	public Rating makeBooking(String arrivalTime, String departureTime, String hid, RegisteredUserData guestData,
+			String persons) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
