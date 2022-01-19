@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import application.MRA_Application;
 import datatypes.RegisteredUserData;
-import dbadapter.HolidayOffer;
+import dbadapter.MovieDatabase;
 
 /**
  * Class responsible for the GUI of the guest
@@ -71,7 +71,7 @@ public class UserGUI extends HttpServlet {
 		// Generate and show results of a search
 		if (request.getParameter("action").equals("browseAvailableHolidayOffers")) {
 			request.setAttribute("pagetitle", "Search results");
-			List<HolidayOffer> availableOffers = null;
+			List<MovieDatabase> availableOffers = null;
 
 			// Call application to request the results
 			try {

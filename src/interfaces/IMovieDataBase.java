@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 import datatypes.RegisteredUserData;
 import dbadapter.Rating;
-import dbadapter.HolidayOffer;
+import dbadapter.MovieDatabase;
 
 /**
  * Interface for DBFacade to provide all necessary database function.
@@ -15,7 +15,7 @@ import dbadapter.HolidayOffer;
  */
 public interface IMovieDataBase {
 
-	public ArrayList<HolidayOffer> getAvailableHolidayOffers(
+	public ArrayList<MovieDatabase> getAvailableHolidayOffers(
 			Timestamp arrivalTime, Timestamp departureTime, int persons);
 
 	public Rating get_fbMRA_RM(Timestamp arrivalTime,

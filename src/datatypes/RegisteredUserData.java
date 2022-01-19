@@ -7,18 +7,18 @@ package datatypes;
  *
  */
 public class RegisteredUserData {
-	private String name;
+	private String username;
 	private int age;
 	private String email;
 
 	public RegisteredUserData(String name, int age, String email) {
-		this.name = name;
+		this.username = username;
 		this.age = age;
 		this.email = email;
 	}
 
 	public String getName() {
-		return name;
+		return username;
 	}
 
 	public int getAge() {

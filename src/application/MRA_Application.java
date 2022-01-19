@@ -6,33 +6,33 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-import datatypes.AddressData;
-import datatypes.GuestData;
-import dbadapter.Booking;
+import datatypes.MovieData;
+import datatypes.RegisteredUserData;
+import dbadapter.Rating;
 import dbadapter.DBFacade;
-import dbadapter.HolidayOffer;
+import dbadapter.MovieDatabase;
 import interfaces.GCmds;
 import interfaces.SMCmds;
 
 /**
- * This class contains the VRApplication which acts as the interface between all
+ * This class contains the MRA_Application which acts as the interface between all
  * components.
  * 
  * @author swe.uni-due.de
  *
  */
-public class VRApplication implements GCmds, SMCmds {
+public class MRA_Application implements GCmds, SMCmds {
 
-	private static VRApplication instance;
+	private static MRA_Application instance;
 
 	/**
 	 * Implementation of the Singleton pattern.
 	 * 
 	 * @return
 	 */
-	public static VRApplication getInstance() {
+	public static MRA_Application getInstance() {
 		if (instance == null) {
-			instance = new VRApplication();
+			instance = new MRA_Application();
 		}
 
 		return instance;
@@ -47,8 +47,8 @@ public class VRApplication implements GCmds, SMCmds {
 	 * @param persons
 	 * @return
 	 */
-	public ArrayList<HolidayOffer> getAvailableHolidayOffers(String arrivalTime, String departureTime, String persons) {
-		ArrayList<HolidayOffer> result = null;
+	public ArrayList<MovieDatabase> getAvailableHolidayOffers(String arrivalTime, String departureTime, String persons) {
+		ArrayList<MovieDatabase> result = null;
 
 		// Parse string attributes to correct datatype
 		try {
@@ -77,7 +77,7 @@ public class VRApplication implements GCmds, SMCmds {
 	 * @param capacity
 	 * @param fee
 	 */
-	public void insertOffer(String startTime, String endTime, AddressData addressData, String capacity, String fee) {
+	public void insertOffer(String startTime, String endTime, MovieData addressData, String capacity, String fee) {
 
 		// Parse inputs to correct datatypes
 		try {
@@ -103,22 +103,24 @@ public class VRApplication implements GCmds, SMCmds {
 	 * @param arrivalTime
 	 * @param departureTime
 	 * @param hid
-	 * @param guestData
+	 * @param RegisteredUserData
 	 * @param persons
 	 * @return
 	 */
-	public Booking makeBooking(String arrivalTime, String departureTime, String hid, GuestData guestData,
-			String persons) {
+	public Rating makeRating(String mId, String movieRating, String comment, RegisteredUserData username) 
+	{
 
-		// pre: ho−>one(h:HolidayOffer|h.id = hid)
-		assert preOfferAvailable(Integer.parseInt(hid)) : "Precondition not satisfied";
+		// pre: md->one(m: MovieDatabase | m.movieID=mId
+		//assert preOfferAvailable(Integer.parseInt(hid)) : "Precondition not satisfied";
+		assert alreadyRated(Integer.parseInt(mId)) : "Precondition not satisfied";
+
 
 		// Create result object
-		Booking okfail = null;
+		Rating okfail = null;
 
 		// Parse inputs to correct datatypes
 		try {
-			DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+			String comment = new String(comment);
 			Date date = dateFormat.parse(arrivalTime);
 			long time = date.getTime();
 			Timestamp arrivalTimeSQL = new Timestamp(time);
@@ -126,9 +128,9 @@ public class VRApplication implements GCmds, SMCmds {
 			Date date2 = dateFormat2.parse(departureTime);
 			long time2 = date2.getTime();
 			Timestamp departureTimeSQL = new Timestamp(time2);
-			int hidSQL = Integer.parseInt(hid);
-			int personsSQL = Integer.parseInt(persons);
-			okfail = DBFacade.getInstance().bookingHolidayOffer(arrivalTimeSQL, departureTimeSQL, hidSQL, guestData,
+			int mIdSQL = Integer.parseInt(mId);
+			int movieRatingSQL = Integer.parseInt(movieRating);
+			okfail = DBFacade.getInstance().get_fbMRA_RM(arrivalTimeSQL, departureTimeSQL, hidSQL, RegisteredUsers,
 					personsSQL);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -146,10 +148,10 @@ public class VRApplication implements GCmds, SMCmds {
 	/**
 	 * Checks precondition holidayoffer exists
 	 * 
-	 * @param hid
+	 * @param mId
 	 * @return
 	 */
-	private boolean preOfferAvailable(int hid) {
-		return DBFacade.getInstance().checkHolidayOfferById(hid);
+	private boolean alreadyRated(int mId) {
+		return DBFacade.getInstance().checkHolidayOfferById(mId);
 	}
 }

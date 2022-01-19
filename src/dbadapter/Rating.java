@@ -1,5 +1,6 @@
 package dbadapter;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 
 import datatypes.RegisteredUserData;
@@ -7,39 +8,37 @@ import datatypes.RegisteredUserData;
 /**
  * Class representing a booking
  * 
- * @author swe.uni-due.de
+ * 
  *
  */
 public class Rating {
 
 	int id;
 	Timestamp creationDate;
-	Timestamp arrivalTime;
-	Timestamp departureTime;
-	boolean paid;
-	RegisteredUserData guestData;
-	double price;
-	int hid;
+	RegisteredUserData username;
+	int movieRating;
+	String comment;
+	Date publishingDate;
+	int mId;
 
-	public Rating(int id, Timestamp creationDate, Timestamp arrivalTime, Timestamp departureTime, boolean paid,
-			RegisteredUserData guestData, double price, int hid) {
+	public Rating(int id, Timestamp creationDate, RegisteredUserData username, int movieRating, String comment,
+			int mId, Date publishingDate) {
 		super();
 		this.id = id;
 		this.creationDate = creationDate;
-		this.arrivalTime = arrivalTime;
-		this.departureTime = departureTime;
-		this.paid = paid;
-		this.guestData = guestData;
-		this.price = price;
-		this.hid = hid;
+		this.username = username;
+		this.movieRating = movieRating;
+		this.comment = comment;
+		this.mId = mId;
+		this.publishingDate = publishingDate;
 	}
 
-	public int getHid() {
-		return hid;
+	public int getmId() {
+		return mId;
 	}
 
-	public void setHid(int hid) {
-		this.hid = hid;
+	public void setmId(int mId) {
+		this.mId = mId;
 	}
 
 	public int getId() {
@@ -58,74 +57,82 @@ public class Rating {
 		this.creationDate = creationDate;
 	}
 
-	public Timestamp getArrivalTime() {
-		return arrivalTime;
+	public RegisteredUserData getusername() {
+		return username;
 	}
 
-	public void setArrivalTime(Timestamp arrivalTime) {
-		this.arrivalTime = arrivalTime;
+	public void setusername(RegisteredUserData username) {
+		this.username = username;
 	}
 
-	public Timestamp getDepartureTime() {
-		return departureTime;
+	public int getmovieRating() {
+		return movieRating;
 	}
 
-	public void setDepartureTime(Timestamp departureTime) {
-		this.departureTime = departureTime;
+	public void setmovieRating(int movieRating) {
+		this.movieRating = movieRating;
 	}
 
-	public boolean isPaid() {
-		return paid;
+	public String getcomment() {
+		return comment;
 	}
 
-	public void setPaid(boolean paid) {
-		this.paid = paid;
+	public void setcomment(String comment) {
+		this.comment = comment;
 	}
 
-	public RegisteredUserData getGuestData() {
-		return guestData;
+	public Date getpublishingDate() {
+		return publishingDate;
 	}
 
-	public void setGuestData(RegisteredUserData guestData) {
-		this.guestData = guestData;
-	}
-
-	public double getPrice() {
-		return price;
-	}
-
-	public void setPrice(double price) {
-		this.price = price;
+	public void setpublishingDate(Date publishingDate) {
+		this.publishingDate = publishingDate;
 	}
 
 	/**
-	 * Checks if this booking overlaps with the given timespace.
+	 * Checks if this user has already rated the movie.
 	 * 
-	 * @param arrivalTime
-	 * @param departureTime
+	 * @param username
+	 * @param mId
 	 * @return
 	 */
-	public boolean overlap(Timestamp arrivalTime, Timestamp departureTime) {
+	/*public boolean verify(RegisteredUserData username, int mId) {
 		//Check precondition
-		assert this.arrivalTime.before(this.departureTime) :
-			"pre not satisfiedd: this.arrivalTime < this.departureTime";
-		assert arrivalTime.before(departureTime) :
-			"pre not satisfiedd: arrivalTime < departureTime";
+		assert this.username.before(this.mId) :
+			"pre not satisfiedd: this.username < this.movieRating";
+		assert username.before(movieRating) :
+			"pre not satisfiedd: username < movieRating";
 		// Case 1
-		if ((arrivalTime.after(this.arrivalTime) || arrivalTime.equals(this.arrivalTime))
-				&& (arrivalTime.before(this.departureTime) || arrivalTime.equals(this.departureTime))) {
+		if ((username.after(this.username) || username.equals(this.username))
+				&& (username.before(this.movieRating) || username.equals(this.movieRating))) {
 			return true;
 		}
 		// Case 2
-		if ((departureTime.after(this.arrivalTime) || departureTime.equals(this.arrivalTime))
-				&& (departureTime.before(this.departureTime) || departureTime.equals(this.departureTime))) {
+		if ((movieRating.after(this.username) || movieRating.equals(this.username))
+				&& (movieRating.before(this.movieRating) || movieRating.equals(this.movieRating))) {
 			return true;
 		}
 		// Case 3
-		if (arrivalTime.before(this.arrivalTime) && departureTime.after(this.departureTime)) {
+		if (username.before(this.username) && movieRating.after(this.movieRating)) {
 			return true;
 		}
 		return false;
-	}
+	}  */
+
+	/*
+	*checks if movieRating >= 1 and movieRating <= 10
+	* @param umovieRating
+	 * @return
+	 * */
+
+	 public float Rate(int movieRating) {
+
+		if (movieRating >= 1) && (movieRating <= 10) {
+			return movieRating;	
+		}
+		else {
+			System.out.println("invalid value");
+		}
+	 }
 
 }

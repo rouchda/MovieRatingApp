@@ -1,28 +1,28 @@
 package dbadapter;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 
-import datatypes.AddressData;
+import datatypes.MovieData;
+import datatypes.RegisteredUserData;
 
 /**
  * Class representing an offer
  * 
- * @author swe.uni-due.de
+ * 
  *
  */
-public class HolidayOffer {
+public class MovieDatabase {
 
-	private int id;
-	private Timestamp startTime;
-	private Timestamp endTime;
-	private AddressData addressData;
-	private int capacity;
-	private double fee;
-	private ArrayList<Rating> bookings;
+	int id;
+	RegisteredUserData username;
+	int movieRating;
+	Date publishingDate;
+	int mId;
 
-	public HolidayOffer(int id, Timestamp startTime, Timestamp endTime, AddressData addressData, int capacity,
-			double fee) {
+	public MovieDatabase(int id, RegisteredUserData username, int movieRating, String comment,
+	int mId, Date publishingDate) {
 		this.id = id;
 		this.startTime = startTime;
 		this.endTime = endTime;
@@ -49,7 +49,7 @@ public class HolidayOffer {
 		return endTime;
 	}
 
-	public AddressData getAddressData() {
+	public MovieData getAddressData() {
 		return addressData;
 	}
 
@@ -71,7 +71,7 @@ public class HolidayOffer {
 
 	/**
 	 * Checking if this offer is available. All bookings for this offer are
-	 * iteratively checked.
+	 * iteratively checked. check if a movie is already present in the MDB
 	 * 
 	 * @param arrivalTime
 	 * @param departureTime

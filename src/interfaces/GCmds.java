@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import datatypes.RegisteredUserData;
 import dbadapter.Rating;
-import dbadapter.HolidayOffer;
+import dbadapter.MovieDatabase;
 
 /**
  * Interface that provides all method to interact with a guest.
@@ -14,7 +14,7 @@ import dbadapter.HolidayOffer;
  */
 public interface GCmds {
 
-	public ArrayList<HolidayOffer> getAvailableHolidayOffers(String arrivalTime, String departureTime, String persons);
+	public ArrayList<MovieDatabase> getAvailableHolidayOffers(String arrivalTime, String departureTime, String persons);
 
 	public Rating makeBooking(String arrivalTime, String departureTime, String hid, RegisteredUserData guestData,
 			String persons);
