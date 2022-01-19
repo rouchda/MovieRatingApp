@@ -8,8 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import application.VRApplication;
-import datatypes.GuestData;
+import application.MRA_Application;
+import datatypes.RegisteredUserData;
 import dbadapter.HolidayOffer;
 
 /**
@@ -18,7 +18,7 @@ import dbadapter.HolidayOffer;
  * @author swe.uni-due.de
  *
  */
-public class GuestGUI extends HttpServlet {
+public class UserGUI extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
@@ -75,7 +75,7 @@ public class GuestGUI extends HttpServlet {
 
 			// Call application to request the results
 			try {
-				availableOffers = VRApplication.getInstance().getAvailableHolidayOffers(
+				availableOffers = MRA_Application.getInstance().getAvailableHolidayOffers(
 						request.getParameter("arrivalTime"), request.getParameter("departureTime"),
 						request.getParameter("persons"));
 
@@ -95,9 +95,9 @@ public class GuestGUI extends HttpServlet {
 			// Insert booking into database
 		} else if (request.getParameter("action").equals("bookHolidayOffer")) {
 			// Decide whether booking was successful or not
-			if (VRApplication.getInstance().makeBooking(request.getParameter("arrivalTime"),
+			if (MRA_Application.getInstance().makeBooking(request.getParameter("arrivalTime"),
 					request.getParameter("departureTime"), request.getParameter("hid"),
-					new GuestData(request.getParameter("name"), request.getParameter("email")),
+					new RegisteredUserData(request.getParameter("name"), request.getParameter("email")),
 					request.getParameter("persons")) != null) {
 
 				// Set request attributes

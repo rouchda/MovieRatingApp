@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import application.VRApplication;
+import application.MRA_Application;
 import datatypes.AddressData;
 
 /**
@@ -57,7 +57,7 @@ public class StaffmemberGUI extends HttpServlet {
 			String fee = (String) request.getParameter("fee");
 
 			// Call application to insert offer
-			new VRApplication().insertOffer(startTime, endTime, new AddressData(street, town), capacity, fee);
+			new MRA_Application().insertOffer(startTime, endTime, new AddressData(street, town), capacity, fee);
 
 			// Dispatch message to template engine
 			try {

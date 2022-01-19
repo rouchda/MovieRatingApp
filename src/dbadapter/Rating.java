@@ -2,7 +2,7 @@ package dbadapter;
 
 import java.sql.Timestamp;
 
-import datatypes.GuestData;
+import datatypes.RegisteredUserData;
 
 /**
  * Class representing a booking
@@ -10,19 +10,19 @@ import datatypes.GuestData;
  * @author swe.uni-due.de
  *
  */
-public class Booking {
+public class Rating {
 
 	int id;
 	Timestamp creationDate;
 	Timestamp arrivalTime;
 	Timestamp departureTime;
 	boolean paid;
-	GuestData guestData;
+	RegisteredUserData guestData;
 	double price;
 	int hid;
 
-	public Booking(int id, Timestamp creationDate, Timestamp arrivalTime, Timestamp departureTime, boolean paid,
-			GuestData guestData, double price, int hid) {
+	public Rating(int id, Timestamp creationDate, Timestamp arrivalTime, Timestamp departureTime, boolean paid,
+			RegisteredUserData guestData, double price, int hid) {
 		super();
 		this.id = id;
 		this.creationDate = creationDate;
@@ -82,11 +82,11 @@ public class Booking {
 		this.paid = paid;
 	}
 
-	public GuestData getGuestData() {
+	public RegisteredUserData getGuestData() {
 		return guestData;
 	}
 
-	public void setGuestData(GuestData guestData) {
+	public void setGuestData(RegisteredUserData guestData) {
 		this.guestData = guestData;
 	}
 

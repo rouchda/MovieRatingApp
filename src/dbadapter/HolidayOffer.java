@@ -19,7 +19,7 @@ public class HolidayOffer {
 	private AddressData addressData;
 	private int capacity;
 	private double fee;
-	private ArrayList<Booking> bookings;
+	private ArrayList<Rating> bookings;
 
 	public HolidayOffer(int id, Timestamp startTime, Timestamp endTime, AddressData addressData, int capacity,
 			double fee) {
@@ -29,7 +29,7 @@ public class HolidayOffer {
 		this.addressData = addressData;
 		this.capacity = capacity;
 		this.fee = fee;
-		this.bookings = new ArrayList<Booking>();
+		this.bookings = new ArrayList<Rating>();
 	}
 
 	public String toString() {
@@ -61,11 +61,11 @@ public class HolidayOffer {
 		return fee;
 	}
 
-	public ArrayList<Booking> getBookings() {
+	public ArrayList<Rating> getBookings() {
 		return bookings;
 	}
 
-	public void setBookings(ArrayList<Booking> bookings) {
+	public void setBookings(ArrayList<Rating> bookings) {
 		this.bookings = bookings;
 	}
 

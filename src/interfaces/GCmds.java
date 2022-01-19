@@ -2,8 +2,8 @@ package interfaces;
 
 import java.util.ArrayList;
 
-import datatypes.GuestData;
-import dbadapter.Booking;
+import datatypes.RegisteredUserData;
+import dbadapter.Rating;
 import dbadapter.HolidayOffer;
 
 /**
@@ -16,7 +16,7 @@ public interface GCmds {
 
 	public ArrayList<HolidayOffer> getAvailableHolidayOffers(String arrivalTime, String departureTime, String persons);
 
-	public Booking makeBooking(String arrivalTime, String departureTime, String hid, GuestData guestData,
+	public Rating makeBooking(String arrivalTime, String departureTime, String hid, RegisteredUserData guestData,
 			String persons);
 
 }

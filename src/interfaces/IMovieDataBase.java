@@ -3,8 +3,8 @@ package interfaces;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 
-import datatypes.GuestData;
-import dbadapter.Booking;
+import datatypes.RegisteredUserData;
+import dbadapter.Rating;
 import dbadapter.HolidayOffer;
 
 /**
@@ -13,13 +13,13 @@ import dbadapter.HolidayOffer;
  * @author swe.uni-due.de
  *
  */
-public interface IHolidayOffer {
+public interface IMovieDataBase {
 
 	public ArrayList<HolidayOffer> getAvailableHolidayOffers(
 			Timestamp arrivalTime, Timestamp departureTime, int persons);
 
-	public Booking bookingHolidayOffer(Timestamp arrivalTime,
-			Timestamp departureTime, int hid, GuestData guestData, int persons);
+	public Rating get_fbMRA_RM(Timestamp arrivalTime,
+			Timestamp departureTime, int hid, RegisteredUserData guestData, int persons);
 
 	public void setAvailableHolidayOffer();
 
