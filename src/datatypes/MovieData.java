@@ -16,18 +16,18 @@ public class MovieData {
 	public String Title;
 	public String MovieDirector;
 	public String Actor;
-	public int movieRating;
+	public int rating;
 	public String comment;
-	public Date publishingDate;
+	public Date releaseDate;
 
-	public MovieData(int mId, String Title, String Actor, String MovieDirector, int movieRating, String comment, Date publishingDate) {
+	public MovieData(int mId, String Title, String Actor, String MovieDirector, int rating, String comment, Date releaseDate) {
 		this.mId = mId;
 		this.Title = Title;
 		this.Actor = Actor;
 		this.MovieDirector = MovieDirector;
-		this.movieRating = movieRating;
+		this.rating = rating;
 		this.comment = comment;
-		this.publishingDate = publishingDate;
+		this.releaseDate = releaseDate;
 	}
 
 	public int getmId() {
@@ -50,12 +50,12 @@ public class MovieData {
 		return comment;
 	}
 
-	public int getmovieRating() {
-		return movieRating;
+	public int getrating() {
+		return rating;
 		}
 
-	public Date getpublishingDate() {
-		return publishingDate;
+	public Date getreleaseDate() {
+		return releaseDate;
 		}
 	}
 
